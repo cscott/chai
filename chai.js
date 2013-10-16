@@ -279,7 +279,9 @@ function AssertionError (message, _props, ssf) {
  * Inherit from Error.prototype
  */
 
-AssertionError.prototype = Object.create(Error.prototype);
+AssertionError.prototype =
+  // friendly fall-back if ES5 Object.create() isn't present.
+  Object.create ? Object.create(Error.prototype) : new Error();
 
 /*!
  * Statically set name
